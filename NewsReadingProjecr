@@ -1,0 +1,35 @@
+#Akhbaar Padhke Sunao
+import requests
+import json
+import time
+
+def speak(str):
+    from win32com.client import Dispatch
+    speak = Dispatch("SAPI.SpVoice")
+    speak.Speak(str)
+
+data = requests.get("https://newsapi.org/v2/top-headlines?country=us&apiKey=5f09eeb91e88495ab53ed10b4349c054")
+result = data.json()
+print(result['status'])
+
+news = result['articles']
+
+speak("Welcome to the Codewith harry news channel")
+speak("Here are some top 10 news")
+speak("Our first news is ")
+for i in range(0,10):
+     print(i)
+     print(news[i]['description'])
+     speak(news[i]['description'])
+
+     if i>=9:
+         break
+     time.sleep(2)
+
+     if i ==8:
+         speak("Our last News is ")
+     else:
+         speak("Our next news is")
+
+speak("Thanks for Listning ! Have a nice day")
+
